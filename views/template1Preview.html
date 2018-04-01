@@ -1,0 +1,233 @@
+<div class="container quotePreviewPublished">
+	
+	<span us-spinner="{radius:30, width:8, length: 16}" spinner-on="refreshQuotesData"></span> 
+
+	<div 
+		class="row row-full" 
+		ng-repeat="x in quoteImagesData  | filter: {imageCategory : 'Banner Image'}"   
+		style="background: white url(../img/{{x.imageFolder}}/{{x.imageFileName}})  no-repeat center;background-size:cover; min-height:120px; ">              
+		      
+	    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center pull-left">  
+	    <p></p>
+
+			
+		</div>
+	        
+		<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" >   
+			<div 
+				ui-tinymce="tinyMceOptions"           
+				ng-model="quoteTextsData.quoteText1"
+		    	ng-change="demo.updateHtml()"
+				class="headingBanner" 
+				>  
+	
+			</div>	
+		</div>    	
+		
+	</div>
+
+<div class="row">
+</div>
+
+
+	<div class="row row-full" style="background:{{quoteTextsData.quoteTextBackgroundColor2}};">      
+		
+		<div class="col-md-8 col-md-offset-2">    
+		<!--	 
+		 <pre ng-bind="quoteTextsData.quoteText1"></pre>    
+		-->		
+			<div 
+				ui-tinymce="tinyMceOptions"           
+				ng-model="quoteTextsData.quoteText2"  
+		    	ng-change="demo.updateHtml()"
+		    	style="min-height:50px;">      
+				
+			</div>	
+			
+		</div> 
+		
+	</div>
+	
+<div class="row row-full" ng-if="quoteTextsData.quoteText3">    
+
+	<div class="col-md-8 col-md-offset-2 TinyMCEContainer">             
+		
+		<div 
+			ui-tinymce="tinyMceOptions"           
+			ng-model="quoteTextsData.quoteText3"  
+	    	ng-change="demo.updateHtml()">          
+			
+		</div>	
+		   
+	</div> 
+
+</div>	
+
+
+	<div class="row row-full" ng-if="quoteDetailsTableItems.length!='0'">    
+	
+	<br />  
+		<div class="col-md-8 col-md-offset-2">   
+	
+			<table class="table table-bordered">
+						<thead>
+							<tr>
+								
+								<th>
+									Description 
+								</th>
+								<th style="width:30%;"> 
+									Cost
+								</th>
+							</tr> 
+						</thead>
+						<tbody>
+							<tr ng:repeat="item in quoteDetailsTableItems">
+	
+								<td>
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										{{item.quoteTableColText1}} 					
+									</div>
+								</td>
+								<td>
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							 			{{item.quoteTableColNumber1 | currency}}    					
+									</div>					 			
+							 
+								</td>
+							</tr>
+						
+							<tr>
+	
+								<td style="text-align:right;">
+								<big>Total</big>
+								</td>
+								<td>
+								<big><b>{{TotalColNumber1 | currency}}</b></big>						 
+								</td>
+							</tr>
+							
+						</tbody>
+					</table>
+				
+		</div> 
+	
+	</div>
+	
+	<div class="row row-full" style="background:{{quoteTextsData.quoteTextBackgroundColor3}};" ng-if="quoteTextsData.quoteText4">     
+	
+			<div class="col-md-8 col-md-offset-2"> 
+			
+				<div 
+					ui-tinymce="tinyMceOptions"           
+					ng-model="quoteTextsData.quoteText4"  
+			    	ng-change="demo.updateHtml()"
+			    	style="min-height:120px;">   
+				</div>	
+			</div> 
+			
+		    	
+	</div>  
+	
+	
+	
+	
+<div class="row row-full" style="margin-top:10px;padding-bottom:10px">   
+
+
+	
+	<br />
+	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center pull-left" >  
+	</div>
+	
+		<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" ng-show="!quoteData.signatureFileName">      
+		
+		<form name="signatureForm"  novalidate> 
+		
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >       
+
+			<signature-pad accept="accept" clear="clear" height="200" width="600" disabled="false" dataurl="signatureData" style="text-align:center;"></signature-pad>              
+
+	     <p></p>
+	     </div>         
+	    
+	            	  
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-left">   
+
+		
+
+	        <div class="input-group" >  
+	          
+	        	<span class="input-group-btn">
+				    <button class="btn btn-success btn-md" type="button" ng-disabled="params.actionType!='viewPublished'" ng-click="signature = accept();processSignatureSubmit();">Sign & Submit</button>  
+				    <button class="btn btn-default btn-md" type="button" ng-click="clear();">Clear</button>   
+				  </span> 
+	          	
+		      	<input 
+		      		type="text" 
+		      		name="signatureName"
+		      		ng-model="quoteData.signatureName"     
+		      		style="width:100%;"  
+		      		ng-required="true"
+		      		class="form-control"
+		      		placeholder="Your first and last name" 
+		      		autocomplete="off">
+		      		
+    		      		
+		      		
+			 </div>
+			   
+			    <span class="error" ng-messages="quoteForm.signatureName.$error" ng-if="signatureForm || quoteForm.signatureName.$touched">
+			        <span ng-message="required">Your first and last name is required</span>    
+			    </span>
+		
+			</div>
+			
+			</form>  
+	
+		  <br /></p>   
+		</div>
+		
+		  
+		
+		<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 text-center" ng-show="quoteData.signatureFileName" >       
+			
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 singleHrBottom" style="height:150px">
+				
+				<img src="../img/signatures/{{quoteData.signatureFileName}}" style="max-height:100%;max-width:100%;">  
+				
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<h4>
+				<b>{{quoteData.signatureName}}</b> on {{quoteData.signatureDateStamp| date:'EEE, d MMMM, yyyy'}} 
+				</h4>
+			</div>
+		</div>
+
+ 
+
+	</div>	
+	
+<div id="footer"
+	ng-repeat="x in quoteImagesData  | filter: {imageCategory : 'Logo Image'}" 
+	ng-if="x.imageFileName!=='logoPlaceholder.jpg'"      
+	>
+  
+    	<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 pull-left">    
+
+			<img src="../img/{{x.imageFolder}}/{{x.imageFileName}}" style="max-height:100%;max-width:100%;"> 
+		
+		</div> 
+		
+    	<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 pull-right">    
+			<p></p>
+			  <button class="btn btn-default btn-md" type="button" onclick="window.print();"><i class="fas fa-print"></i> &nbsp;Print this page</button>   
+				   
+		  
+		</div> 		
+
+</div>	
+
+
+</div> <!-- end of Preview/Published Container -->    
+

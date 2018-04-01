@@ -1,0 +1,327 @@
+<div class="container">
+
+    <div class="col-md-3 col-sm-3 col-xs-12">
+ 
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-12" ng-show="currentForm=='logInForm'"> 
+        <div class="text-center">
+            <h2>Log In</h2>
+        </div>
+        
+        <form name="logInForm" ng-submit="logInForm.$valid" novalidate>
+            
+            <div class="input-group">
+              	<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+              	<input 
+              		type="email" 
+              		name="email"
+              		ng-model="emailLogIn"  
+              		ng-required="true"
+              		class="form-control"
+              		placeholder="Your email"
+              		autocomplete="off"/>
+            </div>
+            <span class="error" ng-messages="logInForm.email.$error" ng-if="submittedLogInForm || logInForm.email.$touched">
+                <span ng-message="required">Your email is required</span>
+                <span ng-message="email">Enter a valid email address</span>
+            </span>
+            <br>
+
+            <div class="input-group">
+              	<span class="input-group-addon"><i class="fa fa-key"></i></span>
+              	<input 
+              		type="password" 
+              		name="password"
+              		ng-model="passwordLogIn" 
+              		ng-required="true"
+              		class="form-control"
+              		placeholder="Your password"
+              		autocomplete="off"/>
+            </div>
+            <span class="error" ng-messages="logInForm.password.$error" ng-if="submittedLogInForm || logInForm.password.$touched">
+                <span ng-message="required">Your password is required</span>
+            </span>
+             
+            <hr />
+
+            <button type="submit" ng-click="processLogInForm(logInForm);" class="btn btn-primary inverse" style="width:100%">Log In</button>
+ 
+        </form>
+            
+        <br>
+        
+        <div class="row col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <button type="submit" ng-click="switchForm('signUpForm');" class="btn btn-default" style="width:100%;">Sign Up</button>
+        </div>
+        <div class="row col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-right">
+              <button type="submit" ng-click="switchForm('resetPasswordForm');" class="btn btn-default" style="width:100%;">Reset Password</button>
+        </div>
+        
+    </div>
+
+    <div class="col-md-6 col-sm-6 col-xs-12" ng-show="currentForm=='signUpForm'">
+        
+        <div class="text-center">
+            <h2>Sign Up</h2>
+        </div>
+
+        
+        <form name="signUpForm" ng-submit="signUpForm.$valid" novalidate>
+
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-user"></i></span>
+              <input 
+              	type="text" 
+              	name="name"
+              	ng-model="nameSignUp"
+              	ng-required="true"
+              	ng-minlength="2"
+              	class="form-control"
+              	placeholder="Your name"
+              	autocomplete="off"/>
+            </div>
+            <span class="error" ng-messages="signUpForm.name.$error" ng-if="submittedSignUpForm || signUpForm.name.$touched">
+                <span ng-message="required">Your name is required</span>
+                <span ng-message="minlength">Must be atleast 3 characters long</span>
+            </span>
+            <br>
+
+            <div class="input-group">
+              	<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+              	<input 
+              		type="email" 
+              		name="email"
+              		ng-model="emailSignUp"
+              		ng-required="true"
+              		class="form-control"
+              		placeholder="Your email"
+              		autocomplete="off"/>
+            </div>
+            <span class="error" ng-messages="signUpForm.email.$error" ng-if="submittedSignUpForm || signUpForm.email.$touched">
+                <span ng-message="required">Your email is required</span>
+                <span ng-message="email">Enter a valid email address</span>
+            </span>
+            <br>
+ 
+            <div class="input-group">
+              	<span class="input-group-addon"><i class="fa fa-key"></i></span>
+              	<input 
+              		type="password" 
+              		name="password"
+              		ng-model="passwordSignUp"
+              		ng-required="true"
+              		ng-minlength="2" 
+              		class="form-control"
+              		placeholder="Password"
+              		autocomplete="off"/>
+            </div>
+            <span class="error" ng-messages="signUpForm.password.$error" ng-if="submittedSignUpForm || signUpForm.password.$touched">
+                <span ng-message="required">A password is required</span>
+                <span ng-message="minlength">Must be atleast 3 characters long</span>
+            </span>
+            
+            <hr />  
+            <button type="submit" ng-click="processSignUpForm(signUpForm);" class="btn btn-primary inverse" style="width:100%">Sign Up</button>
+ 
+        </form>
+            
+        <br>
+        
+        <div class="row col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <button type="submit" ng-click="switchForm('logInForm');" class="btn btn-default" style="width:100%;">Log In</button>
+        </div>
+        <div class="row col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-right">
+              <button type="submit" ng-click="switchForm('resetPasswordForm');" class="btn btn-default" style="width:100%;">Reset Password</button>
+        </div>
+        
+    </div>
+ 
+     <div class="col-md-6 col-sm-6 col-xs-12" ng-show="currentForm=='purchaseForm'">
+        
+        <div class="text-center singleHrBottom">
+            <h2>Purchase</h2>
+        </div>
+        
+        <p class="body2 text-center">
+            <br>
+            Hello {{memberName}}, get complete access to The Leadership Quest app for <b>${{appCost}}</b>
+            <br>
+        </p>
+        
+        <form name="purchaseForm" ng-submit="purchaseForm.$valid" novalidate>
+
+            <div class="input-group">
+    			<span class="input-group-addon">
+    		        <i class="fa fa-credit-card"></i>
+        		</span>
+				<input 
+					type="text"
+					name="ccNumber"
+					ng-model="ccNumber" 
+					payments-validate="card"   
+					payments-format="card"
+					payments-type-model="ccType"
+					ng-class="purchaseForm.ccNumber.$card.type"
+					ng-required="true"
+			  		class="form-control"
+				    placeholder="Credit Card Number">
+    				
+    		</div>
+    		<span class="error"  ng-messages="purchaseForm.ccNumber.$error" ng-if="submittedPurchaseForm || purchaseForm.ccNumber.$touched">
+            <span ng-message="required">Your credit card number is required</span>
+           	</span>
+          	<br>
+       
+            <div class="input-group" >
+    			<span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+    				<input 
+    					type="text"
+    					name="expiry"
+    					ng-model="expiry"  
+    					payments-format="expiry"
+    					ng-required="true"
+    			  		class="form-control"
+    				    placeholder="MM/YYYY">
+    		</div>
+    		<span class="error"  ng-messages="purchaseForm.expiry.$error" ng-if="submittedPurchaseForm || purchaseForm.expiry.$touched">
+            <span ng-message="required">Expiry month/ year is required.</span>
+          	</span>
+    	    <br>
+
+            
+    		<div class="input-group">
+    			<span class="input-group-addon"><i class="fa fa-lock"></i>&nbsp;</span>
+		       		<input 
+						type="text"
+						name="cvc"
+						ng-model="cvc"  
+						payments-format="cvc"
+						ng-required="true"
+				  		class="form-control"
+					    placeholder="CVC" />
+            </div>
+            <span class="center-right error"  ng-messages="purchaseForm.cvc.$error" ng-if="submittedPurchaseForm || purchaseForm.cvc.$touched">
+            <span ng-message="required">CVC is required</span>
+          	</span>
+
+            
+            <hr />  
+            <button type="submit" ng-click="processPurchaseForm(purchaseForm);" class="btn btn-primary inverse" style="width:100%">Pay ${{appCost}}</button>
+ 
+        </form>
+            
+        <br>
+        
+        <div class="row col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <button type="submit" ng-click="switchForm('logInForm');" class="btn btn-default" style="width:100%;">Log In</button>
+        </div>
+        <div class="row col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-right">
+              <button type="submit" ng-click="switchForm('resetPasswordForm');" class="btn btn-default" style="width:100%;">Reset Password</button>
+        </div>
+        
+    </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    
+    <div class="col-md-6 col-sm-6 col-xs-12" ng-show="currentForm=='resetPasswordForm'">
+        
+        <div class="text-center">
+            <h2>Reset Password</h2>
+        </div>
+        
+        <form name="resetPasswordForm" ng-submit="resetPasswordForm.$valid" novalidate>
+            
+            <div class="input-group">
+              	<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+              	<input 
+              		type="email" 
+              		name="email"
+              		ng-model="emailResetPassword"
+              		ng-required="true"
+              		class="form-control"
+              		placeholder="Your email"
+              		autocomplete="off"/>
+            </div>
+            <span class="error" ng-messages="resetPasswordForm.email.$error" ng-if="submittedResetPasswordForm || resetPasswordForm.email.$touched">
+                <span ng-message="required">Your email is required</span>
+                <span ng-message="email">Enter a valid email address</span>
+            </span>
+            <br>
+
+            <div class="input-group">
+              	<span class="input-group-addon"><i class="fa fa-key"></i></span>
+              	<input 
+              		type="password" 
+              		name="password"
+              		ng-model="passwordResetPassword"
+              		ng-required="true"
+              		ng-minlength="2" 
+              		class="form-control"
+              		placeholder="New password"
+              		autocomplete="off"/>
+            </div>
+            <span class="error" ng-messages="resetPasswordForm.password.$error" ng-if="submittedResetPasswordForm || resetPasswordForm.password.$touched">
+                <span ng-message="required">Enter a new password</span>
+                <span ng-message="minlength">Must be atleast 3 characters long</span>
+            </span>
+              
+            <hr />
+            <button type="submit" ng-click="processResetPasswordForm(resetPasswordForm);" class="btn btn-primary inverse" style="width:100%">Reset Password</button>
+ 
+        </form>
+            
+        <br>
+        
+        <div class="row col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <button type="submit" ng-click="switchForm('logInForm');" class="btn btn-default" style="width:100%;">Log In</button>
+        </div>
+        <div class="row col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-right">
+              <button type="submit" ng-click="switchForm('signUpForm');" class="btn btn-default" style="width:100%;">Sign Up</button>
+        </div>
+        
+    </div>    
+    
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+    <div class="container">  
+
+        
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div class="logoSection">
+                <a class="logo" href="http://ecrafter.ca">
+                    <img class="pull-left" src="img/common/eCrafter_powered_by.png"></img>
+                </a> 
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div class="logoSection text-center">
+                <!--
+                <a href="http://www.iubenda.com/privacy-policy/382794">
+                    Privacy Policy 
+                </a> 
+                -->
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div class="logoSection">
+                <a class="logo" href="http://globalleader.ca">
+                    <img class="pull-right" src="img/common/logo_nav.png"></img>
+                </a>        
+
+            </div>
+
+        </div>
+
+    </div>
+</nav>
